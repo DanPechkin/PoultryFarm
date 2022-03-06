@@ -61,8 +61,8 @@ create table Cages (
 
        --внешние ключи 
        constraint FK_Cages_Workshop foreign key (IdWorkshop) references dbo.Workshop(Id),
-       constraint FK_Cages_Chicken  foreign key (IdChicken)  references dbo.Chichens(Id), 
-       constraint FK_Cages_Worker  foreign key (IdWorker)   references dbo.Worker(Id)
+       constraint FK_Cages_Chicken  foreign key (IdChicken)  references dbo.Chickens(Id), 
+       constraint FK_Cages_Worker  foreign key (IdWorker)   references dbo.Workers(Id)
         
 );
 
@@ -76,7 +76,7 @@ create table Chickens (
 
  --внешние ключи 
        constraint FK_Chicken_Breed foreign key (IdBreed) references dbo.Breeds(Id),
-       constraint FK_Chicken_Cage  foreign key (IdCage)  references dbo.Cages(Id)
+       
 );
 
  
@@ -92,7 +92,7 @@ create table Workers (
         Salary              int          not null,                       -- зарплата
         Fired               bit                                          -- признак уволенности  
         --внешний ключ
-    constraint FK_Workers_Workshop foreign key (IdWorkshop) references dbo.Workshop(Id)
+    constraint FK_Workers_Workshop foreign key (IdWorkshop) references dbo.Workshop(Id) ON DELETE NO ACTION
 
         
 );
