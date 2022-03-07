@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="PoultryFarm" Class="PoultryFarmDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\App_Data\PoultryFarm.mdf;Integrated Security=True" SettingsObjectName="Poultry_farm.Properties.Settings" SettingsPropertyName="PoultryFarmConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Breeds" Member="Breeds">
+    <Type Name="Breed">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BreedName" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="AverageEggsNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AverageWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="IdDietNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Breed_Chicken" Member="Chickens" ThisKey="Id" OtherKey="IdBreed" Type="Chicken" />
+      <Association Name="Diet_Breed" Member="Diet" ThisKey="IdDietNumber" OtherKey="Id" Type="Diet" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Workshop" Member="Workshops">
+    <Type Name="Workshop">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ShopName" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfRows" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfCages" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Workshop_Cage" Member="Cages" ThisKey="Id" OtherKey="IdWorkshop" Type="Cage" />
+      <Association Name="Workshop_Worker" Member="Workers" ThisKey="Id" OtherKey="IdWorkshop" Type="Worker" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cages" Member="Cages">
+    <Type Name="Cage">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdWorkshop" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdChicken" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdWorker" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RowNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CageNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Workshop_Cage" Member="Workshop" ThisKey="IdWorkshop" OtherKey="Id" Type="Workshop" IsForeignKey="true" />
+      <Association Name="Chicken_Cage" Member="Chicken" ThisKey="IdChicken" OtherKey="Id" Type="Chicken" IsForeignKey="true" />
+      <Association Name="Worker_Cage" Member="Worker" ThisKey="IdWorker" OtherKey="Id" Type="Worker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Chickens" Member="Chickens">
+    <Type Name="Chicken">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdBreed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ChickenWeight" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="ChickenAge" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Chicken_Cage" Member="Cages" ThisKey="Id" OtherKey="IdChicken" Type="Cage" />
+      <Association Name="Chicken_Production" Member="Productions" ThisKey="Id" OtherKey="IdChicken" Type="Production" />
+      <Association Name="Breed_Chicken" Member="Breed" ThisKey="IdBreed" OtherKey="Id" Type="Breed" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Diets" Member="Diets">
+    <Type Name="Diet">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Number" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Diet_Breed" Member="Breeds" ThisKey="Id" OtherKey="IdDietNumber" Type="Breed" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Production" Member="Productions">
+    <Type Name="Production">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdChicken" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfEggs" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Chicken_Production" Member="Chicken" ThisKey="IdChicken" OtherKey="Id" Type="Chicken" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Workers" Member="Workers">
+    <Type Name="Worker">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdWorkshop" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Surname" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="Patronymic" Type="System.String" DbType="NVarChar(60) NOT NULL" CanBeNull="false" />
+      <Column Name="Passport" Type="System.String" DbType="NVarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Salary" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fired" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Worker_Cage" Member="Cages" ThisKey="Id" OtherKey="IdWorker" Type="Cage" />
+      <Association Name="Workshop_Worker" Member="Workshop" ThisKey="IdWorkshop" OtherKey="Id" Type="Workshop" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

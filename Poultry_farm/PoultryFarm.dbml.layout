@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 9" name="PoultryFarm">
+  <DataContextMoniker Name="/PoultryFarmDataContext" />
+  <nestedChildShapes>
+    <classShape Id="b43555e0-d7b7-46ea-bd2b-e3786ca9a184" absoluteBounds="3.5, 3.875, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/PoultryFarmDataContext/Breed" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5a4f9cb2-c259-4760-8b95-b77027bf7108" absoluteBounds="3.515, 4.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="28c545d9-6482-4de6-a646-38708ec85d81" absoluteBounds="6.25, 1, 2, 1.5785953776041668">
+      <DataClassMoniker Name="/PoultryFarmDataContext/Workshop" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d99d083f-ea29-49a2-82bb-4b5ca809fc43" absoluteBounds="6.265, 1.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3010c47b-8810-4369-923b-45f1a12155d6" absoluteBounds="9, 0.75, 2, 1.9631982421875">
+      <DataClassMoniker Name="/PoultryFarmDataContext/Cage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fd033512-e10e-4e1c-8460-4a823f63eec5" absoluteBounds="9.015, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="367ec413-924b-4c3f-9f5c-203349414f9b" absoluteBounds="6.25, 4, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/PoultryFarmDataContext/Chicken" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ef57b642-23cb-496c-96ec-50aa41613ac8" absoluteBounds="6.265, 4.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="143d4703-4169-4768-bbd1-0c1af0b0fdb8" absoluteBounds="0.75, 4.125, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/PoultryFarmDataContext/Diet" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8db18c04-1331-4aa0-b871-2256c6e2ddd0" absoluteBounds="0.765, 4.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5da81047-6ca1-4c7a-b6d5-b10b4ad35039" absoluteBounds="9, 4, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/PoultryFarmDataContext/Production" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5b824165-e3ab-4726-8d3c-67b3f0af3610" absoluteBounds="9.015, 4.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3e4d55f1-3593-458e-af00-4a58a44354d7" absoluteBounds="6.25, 6.375, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/PoultryFarmDataContext/Worker" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a7bc094f-def9-43b8-8e9b-1ff9c38e6c4c" absoluteBounds="6.265, 6.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.25 : 1.78929768880208); (8.54166666666667 : 1.78929768880208 : JumpStart); (8.70833333333333 : 1.78929768880208 : JumpEnd); (9 : 1.78929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PoultryFarmDataContext/Workshop/Workshop_Cage" />
+      <nodes>
+        <classShapeMoniker Id="28c545d9-6482-4de6-a646-38708ec85d81" />
+        <classShapeMoniker Id="3010c47b-8810-4369-923b-45f1a12155d6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4); (8.625 : 3.625); (8.625 : 1.23839684440104); (9 : 1.23839684440104)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PoultryFarmDataContext/Chicken/Chicken_Cage" />
+      <nodes>
+        <classShapeMoniker Id="367ec413-924b-4c3f-9f5c-203349414f9b" />
+        <classShapeMoniker Id="3010c47b-8810-4369-923b-45f1a12155d6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.5 : 4.78929768880208); (5.79166666666667 : 4.78929768880208 : JumpStart); (5.95833333333333 : 4.78929768880208 : JumpEnd); (6.25 : 4.78929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PoultryFarmDataContext/Breed/Breed_Chicken" />
+      <nodes>
+        <classShapeMoniker Id="b43555e0-d7b7-46ea-bd2b-e3786ca9a184" />
+        <classShapeMoniker Id="367ec413-924b-4c3f-9f5c-203349414f9b" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 4.72199625651042); (3.5 : 4.72199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PoultryFarmDataContext/Diet/Diet_Breed" />
+      <nodes>
+        <classShapeMoniker Id="143d4703-4169-4768-bbd1-0c1af0b0fdb8" />
+        <classShapeMoniker Id="b43555e0-d7b7-46ea-bd2b-e3786ca9a184" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 4.82055018880208); (8.72916666666667 : 4.82055018880208 : JumpStart); (8.89583333333333 : 4.82055018880208 : JumpEnd); (9 : 4.82055018880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PoultryFarmDataContext/Chicken/Chicken_Production" />
+      <nodes>
+        <classShapeMoniker Id="367ec413-924b-4c3f-9f5c-203349414f9b" />
+        <classShapeMoniker Id="5da81047-6ca1-4c7a-b6d5-b10b4ad35039" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.25 : 6.43653746153846); (8.8125 : 5.87403746153846); (8.8125 : 2.28249996549479); (9 : 2.28249996549479)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PoultryFarmDataContext/Worker/Worker_Cage" />
+      <nodes>
+        <classShapeMoniker Id="3e4d55f1-3593-458e-af00-4a58a44354d7" />
+        <classShapeMoniker Id="3010c47b-8810-4369-923b-45f1a12155d6" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.25 : 2.57859537760417); (5.875 : 2.95359537760417); (5.875 : 6); (6.25 : 6.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PoultryFarmDataContext/Workshop/Workshop_Worker" />
+      <nodes>
+        <classShapeMoniker Id="28c545d9-6482-4de6-a646-38708ec85d81" />
+        <classShapeMoniker Id="3e4d55f1-3593-458e-af00-4a58a44354d7" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

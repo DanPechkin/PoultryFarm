@@ -25,11 +25,13 @@
 
 */
 -- удаление таблиц 
-drop table if exists Workshop
+drop table if exists Workshop 
+drop table if exists Cages 
 drop table if exists Workers
+drop table if exists Production
 drop table if exists Chickens
-drop table if exists Cages
-drop table if exists Breeds 
+drop table if exists Breeds
+drop table if exists Diets
 
 --диета 
 create table Diets 
@@ -46,24 +48,8 @@ create table Breeds (
         AverageWeight     float        not null,                            -- средний вес курицы
         IdDietNumber      int          not null                             -- внешний ключ, номер диеты
 
-        constraint FK_Breeds_Diet foreign key (IdDietNumber) references dbo.Diets(Id)
+        constraint FK_Breeds_Diet foreign key (IdDietNumber) references dbo.Diets(Id),
         constraint CK_Breed_Average_Weight check ([AverageWeight] >=0)
-);
-
---клектка 
-create table Cages (
-        Id                 int   not null  primary key identity (1,1),
-        IdWorkshop         int   not null,                           -- внешний ключ, связь с цехом
-        IdChicken          int   not null,                           -- внешний ключ, связь с курицей
-        IdWorker           int   not null,                           -- внешний ключ, с работником 
-        RowNumber          int   not null,                           -- номер ряда в цеху
-        CageNumber         int   not null,                           -- номер клетки в ряду  
-
-       --внешние ключи 
-       constraint FK_Cages_Workshop foreign key (IdWorkshop) references dbo.Workshop(Id),
-       constraint FK_Cages_Chicken  foreign key (IdChicken)  references dbo.Chickens(Id), 
-       constraint FK_Cages_Worker  foreign key (IdWorker)   references dbo.Workers(Id)
-        
 );
 
 -- курица
@@ -78,8 +64,13 @@ create table Chickens (
        constraint FK_Chicken_Breed foreign key (IdBreed) references dbo.Breeds(Id),
        
 );
-
- 
+-- цех
+create table Workshop (
+        Id                int          not null primary key identity(1,1),
+        ShopName          nvarchar(60) not null,          -- название цеха
+        NumberOfRows      int          not null,          -- количество рядов
+        NumberOfCages     int          not null           -- количество клеток
+);
 
 -- работник птицефабрики
 create table Workers (
@@ -97,13 +88,24 @@ create table Workers (
         
 );
 
--- цех
-create table Workshop (
-        Id                int          not null primary key identity(1,1),
-        ShopName          nvarchar(60) not null,          -- название цеха
-        NumberOfRows      int          not null,          -- количество рядов
-        NumberOfCages     int          not null           -- количество клеток
+
+--клектка 
+create table Cages (
+        Id                 int   not null  primary key identity (1,1),
+        IdWorkshop         int   not null,                           -- внешний ключ, связь с цехом
+        IdChicken          int   not null,                           -- внешний ключ, связь с курицей
+        IdWorker           int   not null,                           -- внешний ключ, с работником 
+        RowNumber          int   not null,                           -- номер ряда в цеху
+        CageNumber         int   not null,                           -- номер клетки в ряду  
+
+       --внешние ключи 
+       constraint FK_Cages_Workshop foreign key (IdWorkshop) references dbo.Workshop(Id),
+       constraint FK_Cages_Chicken  foreign key (IdChicken)  references dbo.Chickens(Id), 
+       constraint FK_Cages_Worker  foreign key (IdWorker)   references dbo.Workers(Id)
+        
 );
+
+
 
 --производство 
 create table Production 

@@ -1,7 +1,12 @@
 ﻿
 --Запрос 1.  Количество яиц от каждой курицы данного веса, породы и возраста 
-declare @weight float = 2.7, @breed nvarchar(max) = N'Русская белая', @age int =1
-select * from  Chickens
+declare @weight float = 2.4, @breed nvarchar(max) = N'Русская белая', @age int =7
+select  
+      Breeds.BreedName,
+      Chickens.ChickenWeight,
+      Production.NumberOfEggs
+from  Production
+      Join Chickens on Production.IdChicken = Chickens.Id
       Join Breeds on Chickens.IdBreed = Breeds.Id
 where 
       Chickens.ChickenWeight = @weight and 
@@ -15,65 +20,89 @@ declare @breed nvarchar(max) = N'Русская белая'
 select 
     Top(1)
     BreedName
-    ,WorkshopNumber
+    ,Workshop.ShopName
     ,Count(Chickens.Id) as CountMax
 from 
     Chickens
-    Join Cages on Chickens.IdCage = Cages.Id
     Join Breeds on Chickens.IdBreed = Breeds.Id
-Group by WorkshopNumber,
+    Join Cages on Cages.IdChicken = Chickens.Id
+    Join Workshop on Cages.IdWorkshop = Workshop.Id
+Group by 
+         Workshop.ShopName,
          BreedName
 Having BreedName = @breed 
 Order by  CountMax desc
+go
 
 --Запрос 3. В каких клетках находятся куры указанного возраста с заданным номером диеты? 
 declare @age int = 15, @diet int  = 2 
 select 
-     Cages.Id
+      Cages.Id as NumberOfCage
      ,ChickenAge
-     ,DietNumber
+     ,Diets.Number as DietNumber
 from 
     Chickens
-    Join Cages on Chickens.IdCage = Cages.Id
+    Join Cages  on Cages.IdChicken = Chickens.Id
     Join Breeds on Chickens.IdBreed = Breeds.Id
+    Join Diets  on Breeds.IdDietNumber = Diets.Id 
 Where
-    ChickenAge = @age and DietNumber = @diet
+    ChickenAge = @age and Number = @diet
 
 -- Запрос 4. Сколько яиц в день приносят куры, указанного работника
+ declare @workerSurname nvarchar(60) = N'Елагина'
+ select 
+       Workers.Surname
+       ,Production.NumberOfEggs
+       , Chickens.Id as ChickeId
+ from 
+      Production
+      Join Chickens on Production.IdChicken = Chickens.Id
+      Join Cages on Cages.IdChicken = Chickens.Id
+      Join Workshop on Cages.IdWorkshop = Workshop.Id
+      Join Workers on Workers.IdWorkshop = Workshop.Id
+Where
+      Surname = @workerSurname
+go
+      
+
 
 -- Запрос 6. В каком цеху курица, от которой получают больше всего яиц
 select 
       Top(1)
-     Chickens.Id
-     , Cages.WorkshopNumber
-     , EggsNumber
+     Chickens.Id as ChickensId
+     , Workshop.ShopName
+     , Production.NumberOfEggs
 from 
-     Chickens
-     Join Cages on Chickens.IdCage = Cages.Id
-     Join Breeds on Chickens.IdBreed = Breeds.Id
-Order by EggsNumber desc
+     Production
+     Join Chickens on Production.IdChicken = Chickens.Id
+     Join Cages    on Cages.IdChicken = Chickens.Id
+     Join Workshop on Cages.IdWorkshop = Workshop.Id 
+Order by NumberOfEggs desc
+go
 
 -- Запрос 7 Сколько кур каждой породы в каждом цехе?
 select 
       BreedName
-     ,Count(Breeds.BreedName) as BreedNumber
-     , Cages.WorkshopNumber
+     ,Count(Breeds.BreedName) as NumberOfBreed
+     , Workshop.ShopName
 from 
     Chickens
-    Join Cages on Chickens.IdCage = Cages.Id
     Join Breeds on Chickens.IdBreed = Breeds.Id
+    Join Cages on Cages.IdChicken = Chickens.Id
+    Join Workshop on Cages.IdWorkshop = Workshop.Id
 Group by
         BreedName,
-        WorkshopNumber
+        Workshop.ShopName
+go
 
  -- Запрос 8. Какое количество кур обслуживает каждый работник
- select 
-       Count (Workshop.IdCage) as ChickenNumber
-       , Workers.Id
+select
+       Workers.Surname
+       ,COUNT(Chickens.Id) as NumberOfChickens
 from 
-         
-   
-     
-
-      
-       
+     Workers
+     Join Cages    on Cages.IdWorker = Workers.Id
+     Join Chickens on Cages.IdChicken = Chickens.Id
+Group by
+     Workers.Surname
+go
