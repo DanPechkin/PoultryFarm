@@ -1,0 +1,56 @@
+﻿<Window x:Class="WPF_PoultryFarm.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_PoultryFarm"
+        mc:Ignorable="d"
+        Title="Птицефабрика" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="280*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Пункты меню-->
+        <Menu Grid.Row="0">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выход">
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Запросы">
+                <MenuItem Header="Количество яиц от курицы заданной породы, веса, возраста"></MenuItem>
+                <MenuItem Header="Цех, с наибольшим количеством кур"></MenuItem>
+                <MenuItem Header="Клетки с курами заданного возраста и диеты"></MenuItem>
+                <MenuItem Header="Количество яиц в день от кур указанного сотрудника"></MenuItem>
+                <MenuItem Header="Среднее количество яиц от обслуживаемых кур"></MenuItem>
+                <MenuItem Header="Цех, с курицей с максимальным количестом яиц "></MenuItem>
+                <MenuItem Header="Сколько кур каждой породы в каждом цеху"></MenuItem>
+                <MenuItem Header="Количество кур, обслуживаемых каждым сотрудником"></MenuItem>
+                </MenuItem>
+        </Menu>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    Height="40"
+                    Background="Beige">
+                    
+        </StackPanel>
+                <TextBox Grid.Row="2"
+                 VerticalAlignment="Center"
+                 HorizontalAlignment="Center"
+                 BorderThickness="0"
+                 Margin ="5"
+                 IsReadOnly="True"
+                 FontSize="16"
+                 FontWeight="Bold"
+                 >
+                   Сведения о работе птицефабрики 
+        </TextBox>
+
+
+    </Grid>
+</Window>

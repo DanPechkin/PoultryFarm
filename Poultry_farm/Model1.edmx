@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PoultryFarmModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Breeds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BreedName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="AverageEggsNumber" Type="int" Nullable="false" />
+          <Property Name="AverageWeight" Type="float" Nullable="false" />
+          <Property Name="IdDietNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdWorkshop" Type="int" Nullable="false" />
+          <Property Name="IdChicken" Type="int" Nullable="false" />
+          <Property Name="IdWorker" Type="int" Nullable="false" />
+          <Property Name="RowNumber" Type="int" Nullable="false" />
+          <Property Name="CageNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chickens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBreed" Type="int" Nullable="false" />
+          <Property Name="ChickenWeight" Type="float" Nullable="false" />
+          <Property Name="ChickenAge" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdChicken" Type="int" Nullable="false" />
+          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="NumberOfEggs" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdWorkshop" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="Fired" Type="bit" />
+        </EntityType>
+        <EntityType Name="Workshop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShopName" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="NumberOfRows" Type="int" Nullable="false" />
+          <Property Name="NumberOfCages" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Breeds_Diet">
+          <End Role="Diets" Type="Self.Diets" Multiplicity="1" />
+          <End Role="Breeds" Type="Self.Breeds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Breeds">
+              <PropertyRef Name="IdDietNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cages_Chicken">
+          <End Role="Chickens" Type="Self.Chickens" Multiplicity="1" />
+          <End Role="Cages" Type="Self.Cages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chickens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cages">
+              <PropertyRef Name="IdChicken" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cages_Worker">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
+          <End Role="Cages" Type="Self.Cages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cages">
+              <PropertyRef Name="IdWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cages_Workshop">
+          <End Role="Workshop" Type="Self.Workshop" Multiplicity="1" />
+          <End Role="Cages" Type="Self.Cages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cages">
+              <PropertyRef Name="IdWorkshop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chicken_Breed">
+          <End Role="Breeds" Type="Self.Breeds" Multiplicity="1" />
+          <End Role="Chickens" Type="Self.Chickens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Breeds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chickens">
+              <PropertyRef Name="IdBreed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Chicken">
+          <End Role="Chickens" Type="Self.Chickens" Multiplicity="1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chickens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="IdChicken" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Workshop">
+          <End Role="Workshop" Type="Self.Workshop" Multiplicity="1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="IdWorkshop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PoultryFarmModelStoreContainer">
+          <EntitySet Name="Breeds" EntityType="Self.Breeds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cages" EntityType="Self.Cages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chickens" EntityType="Self.Chickens" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diets" EntityType="Self.Diets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Production" EntityType="Self.Production" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workshop" EntityType="Self.Workshop" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Breeds_Diet" Association="Self.FK_Breeds_Diet">
+            <End Role="Diets" EntitySet="Diets" />
+            <End Role="Breeds" EntitySet="Breeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cages_Chicken" Association="Self.FK_Cages_Chicken">
+            <End Role="Chickens" EntitySet="Chickens" />
+            <End Role="Cages" EntitySet="Cages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cages_Worker" Association="Self.FK_Cages_Worker">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Cages" EntitySet="Cages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cages_Workshop" Association="Self.FK_Cages_Workshop">
+            <End Role="Workshop" EntitySet="Workshop" />
+            <End Role="Cages" EntitySet="Cages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chicken_Breed" Association="Self.FK_Chicken_Breed">
+            <End Role="Breeds" EntitySet="Breeds" />
+            <End Role="Chickens" EntitySet="Chickens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Chicken" Association="Self.FK_Production_Chicken">
+            <End Role="Chickens" EntitySet="Chickens" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Workshop" Association="Self.FK_Workers_Workshop">
+            <End Role="Workshop" EntitySet="Workshop" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PoultryFarmModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Breeds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BreedName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AverageEggsNumber" Type="Int32" Nullable="false" />
+          <Property Name="AverageWeight" Type="Double" Nullable="false" />
+          <Property Name="IdDietNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Diets" Relationship="Self.FK_Breeds_Diet" FromRole="Breeds" ToRole="Diets" />
+          <NavigationProperty Name="Chickens" Relationship="Self.FK_Chicken_Breed" FromRole="Breeds" ToRole="Chickens" />
+        </EntityType>
+        <EntityType Name="Cages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdWorkshop" Type="Int32" Nullable="false" />
+          <Property Name="IdChicken" Type="Int32" Nullable="false" />
+          <Property Name="IdWorker" Type="Int32" Nullable="false" />
+          <Property Name="RowNumber" Type="Int32" Nullable="false" />
+          <Property Name="CageNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Chickens" Relationship="Self.FK_Cages_Chicken" FromRole="Cages" ToRole="Chickens" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_Cages_Worker" FromRole="Cages" ToRole="Workers" />
+          <NavigationProperty Name="Workshop" Relationship="Self.FK_Cages_Workshop" FromRole="Cages" ToRole="Workshop" />
+        </EntityType>
+        <EntityType Name="Chickens">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdBreed" Type="Int32" Nullable="false" />
+          <Property Name="ChickenWeight" Type="Double" Nullable="false" />
+          <Property Name="ChickenAge" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Breeds" Relationship="Self.FK_Chicken_Breed" FromRole="Chickens" ToRole="Breeds" />
+          <NavigationProperty Name="Cages" Relationship="Self.FK_Cages_Chicken" FromRole="Chickens" ToRole="Cages" />
+          <NavigationProperty Name="Production" Relationship="Self.FK_Production_Chicken" FromRole="Chickens" ToRole="Production" />
+        </EntityType>
+        <EntityType Name="Diets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Breeds" Relationship="Self.FK_Breeds_Diet" FromRole="Diets" ToRole="Breeds" />
+        </EntityType>
+        <EntityType Name="Production">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdChicken" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="NumberOfEggs" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Chickens" Relationship="Self.FK_Production_Chicken" FromRole="Production" ToRole="Chickens" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdWorkshop" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passport" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="Fired" Type="Boolean" />
+          <NavigationProperty Name="Cages" Relationship="Self.FK_Cages_Worker" FromRole="Workers" ToRole="Cages" />
+          <NavigationProperty Name="Workshop" Relationship="Self.FK_Workers_Workshop" FromRole="Workers" ToRole="Workshop" />
+        </EntityType>
+        <EntityType Name="Workshop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShopName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberOfRows" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfCages" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cages" Relationship="Self.FK_Cages_Workshop" FromRole="Workshop" ToRole="Cages" />
+          <NavigationProperty Name="Workers" Relationship="Self.FK_Workers_Workshop" FromRole="Workshop" ToRole="Workers" />
+        </EntityType>
+        <Association Name="FK_Breeds_Diet">
+          <End Role="Diets" Type="Self.Diets" Multiplicity="1" />
+          <End Role="Breeds" Type="Self.Breeds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Breeds">
+              <PropertyRef Name="IdDietNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chicken_Breed">
+          <End Role="Breeds" Type="Self.Breeds" Multiplicity="1" />
+          <End Role="Chickens" Type="Self.Chickens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Breeds">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chickens">
+              <PropertyRef Name="IdBreed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cages_Chicken">
+          <End Role="Chickens" Type="Self.Chickens" Multiplicity="1" />
+          <End Role="Cages" Type="Self.Cages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chickens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cages">
+              <PropertyRef Name="IdChicken" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cages_Worker">
+          <End Role="Workers" Type="Self.Workers" Multiplicity="1" />
+          <End Role="Cages" Type="Self.Cages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cages">
+              <PropertyRef Name="IdWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cages_Workshop">
+          <End Role="Workshop" Type="Self.Workshop" Multiplicity="1" />
+          <End Role="Cages" Type="Self.Cages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cages">
+              <PropertyRef Name="IdWorkshop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Production_Chicken">
+          <End Role="Chickens" Type="Self.Chickens" Multiplicity="1" />
+          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chickens">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Production">
+              <PropertyRef Name="IdChicken" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Workshop">
+          <End Role="Workshop" Type="Self.Workshop" Multiplicity="1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="IdWorkshop" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PoultryFarmEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Breeds" EntityType="Self.Breeds" />
+          <EntitySet Name="Cages" EntityType="Self.Cages" />
+          <EntitySet Name="Chickens" EntityType="Self.Chickens" />
+          <EntitySet Name="Diets" EntityType="Self.Diets" />
+          <EntitySet Name="Production" EntityType="Self.Production" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" />
+          <EntitySet Name="Workshop" EntityType="Self.Workshop" />
+          <AssociationSet Name="FK_Breeds_Diet" Association="Self.FK_Breeds_Diet">
+            <End Role="Diets" EntitySet="Diets" />
+            <End Role="Breeds" EntitySet="Breeds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chicken_Breed" Association="Self.FK_Chicken_Breed">
+            <End Role="Breeds" EntitySet="Breeds" />
+            <End Role="Chickens" EntitySet="Chickens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cages_Chicken" Association="Self.FK_Cages_Chicken">
+            <End Role="Chickens" EntitySet="Chickens" />
+            <End Role="Cages" EntitySet="Cages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cages_Worker" Association="Self.FK_Cages_Worker">
+            <End Role="Workers" EntitySet="Workers" />
+            <End Role="Cages" EntitySet="Cages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cages_Workshop" Association="Self.FK_Cages_Workshop">
+            <End Role="Workshop" EntitySet="Workshop" />
+            <End Role="Cages" EntitySet="Cages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Production_Chicken" Association="Self.FK_Production_Chicken">
+            <End Role="Chickens" EntitySet="Chickens" />
+            <End Role="Production" EntitySet="Production" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Workshop" Association="Self.FK_Workers_Workshop">
+            <End Role="Workshop" EntitySet="Workshop" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PoultryFarmModelStoreContainer" CdmEntityContainer="PoultryFarmEntities">
+          <EntitySetMapping Name="Breeds">
+            <EntityTypeMapping TypeName="PoultryFarmModel.Breeds">
+              <MappingFragment StoreEntitySet="Breeds">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BreedName" ColumnName="BreedName" />
+                <ScalarProperty Name="AverageEggsNumber" ColumnName="AverageEggsNumber" />
+                <ScalarProperty Name="AverageWeight" ColumnName="AverageWeight" />
+                <ScalarProperty Name="IdDietNumber" ColumnName="IdDietNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cages">
+            <EntityTypeMapping TypeName="PoultryFarmModel.Cages">
+              <MappingFragment StoreEntitySet="Cages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdWorkshop" ColumnName="IdWorkshop" />
+                <ScalarProperty Name="IdChicken" ColumnName="IdChicken" />
+                <ScalarProperty Name="IdWorker" ColumnName="IdWorker" />
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="CageNumber" ColumnName="CageNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Chickens">
+            <EntityTypeMapping TypeName="PoultryFarmModel.Chickens">
+              <MappingFragment StoreEntitySet="Chickens">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdBreed" ColumnName="IdBreed" />
+                <ScalarProperty Name="ChickenWeight" ColumnName="ChickenWeight" />
+                <ScalarProperty Name="ChickenAge" ColumnName="ChickenAge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diets">
+            <EntityTypeMapping TypeName="PoultryFarmModel.Diets">
+              <MappingFragment StoreEntitySet="Diets">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Production">
+            <EntityTypeMapping TypeName="PoultryFarmModel.Production">
+              <MappingFragment StoreEntitySet="Production">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdChicken" ColumnName="IdChicken" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="NumberOfEggs" ColumnName="NumberOfEggs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="PoultryFarmModel.Workers">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdWorkshop" ColumnName="IdWorkshop" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Fired" ColumnName="Fired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workshop">
+            <EntityTypeMapping TypeName="PoultryFarmModel.Workshop">
+              <MappingFragment StoreEntitySet="Workshop">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+                <ScalarProperty Name="NumberOfRows" ColumnName="NumberOfRows" />
+                <ScalarProperty Name="NumberOfCages" ColumnName="NumberOfCages" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

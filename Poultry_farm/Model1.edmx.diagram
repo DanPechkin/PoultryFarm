@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f09968845deb4e269cfd019ab62e44b3" Name="Diagram1">
+        <EntityTypeShape EntityType="PoultryFarmModel.Breeds" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoultryFarmModel.Cages" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoultryFarmModel.Chickens" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoultryFarmModel.Diets" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoultryFarmModel.Production" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoultryFarmModel.Workers" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoultryFarmModel.Workshop" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="PoultryFarmModel.FK_Breeds_Diet" ManuallyRouted="false" />
+        <AssociationConnector Association="PoultryFarmModel.FK_Chicken_Breed" ManuallyRouted="false" />
+        <AssociationConnector Association="PoultryFarmModel.FK_Cages_Chicken" ManuallyRouted="false" />
+        <AssociationConnector Association="PoultryFarmModel.FK_Cages_Worker" ManuallyRouted="false" />
+        <AssociationConnector Association="PoultryFarmModel.FK_Cages_Workshop" ManuallyRouted="false" />
+        <AssociationConnector Association="PoultryFarmModel.FK_Production_Chicken" ManuallyRouted="false" />
+        <AssociationConnector Association="PoultryFarmModel.FK_Workers_Workshop" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

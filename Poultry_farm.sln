@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poultry_farm", "Poultry_farm\Poultry_farm.csproj", "{17412F45-043A-4F4E-86BE-D34FFDA8491B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf_TextBlock", "Wpf_TextBlock\Wpf_TextBlock.csproj", "{2ADA2BCD-EA83-4504-BE6F-D8948831EAA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_PoultryFarm", "WPF_PoultryFarm\WPF_PoultryFarm.csproj", "{052AFEA9-8627-4DF2-A667-808B6F14A23D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{17412F45-043A-4F4E-86BE-D34FFDA8491B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17412F45-043A-4F4E-86BE-D34FFDA8491B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17412F45-043A-4F4E-86BE-D34FFDA8491B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2ADA2BCD-EA83-4504-BE6F-D8948831EAA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2ADA2BCD-EA83-4504-BE6F-D8948831EAA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2ADA2BCD-EA83-4504-BE6F-D8948831EAA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2ADA2BCD-EA83-4504-BE6F-D8948831EAA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{052AFEA9-8627-4DF2-A667-808B6F14A23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{052AFEA9-8627-4DF2-A667-808B6F14A23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{052AFEA9-8627-4DF2-A667-808B6F14A23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{052AFEA9-8627-4DF2-A667-808B6F14A23D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
