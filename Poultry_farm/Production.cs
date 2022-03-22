@@ -15,7 +15,6 @@ namespace Poultry_farm
     public partial class Production
     {
         public int Id { get; set; }
-        public int IdChicken { get; set; }
         public System.DateTime Data { get; set; }
         public int NumberOfEggs { get; set; }
     

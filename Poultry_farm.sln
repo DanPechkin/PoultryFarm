@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poultry_farm", "Poultry_far
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_PoultryFarm", "WPF_PoultryFarm\WPF_PoultryFarm.csproj", "{052AFEA9-8627-4DF2-A667-808B6F14A23D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTest", "ConsoleAppTest\ConsoleAppTest.csproj", "{287D50A6-A118-4272-8DA7-ABB99F4A9E90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{052AFEA9-8627-4DF2-A667-808B6F14A23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{052AFEA9-8627-4DF2-A667-808B6F14A23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{052AFEA9-8627-4DF2-A667-808B6F14A23D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{287D50A6-A118-4272-8DA7-ABB99F4A9E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{287D50A6-A118-4272-8DA7-ABB99F4A9E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{287D50A6-A118-4272-8DA7-ABB99F4A9E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{287D50A6-A118-4272-8DA7-ABB99F4A9E90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

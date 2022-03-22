@@ -49,22 +49,34 @@ Where
     ChickenAge = @age and Number = @diet
 
 -- Запрос 4. Сколько яиц в день приносят куры, указанного работника
- declare @workerSurname nvarchar(60) = N'Елагина'
+ declare @workerSurname nvarchar(60) = N'Шастина'
  select 
        Workers.Surname
        ,Production.NumberOfEggs
        , Chickens.Id as ChickeId
  from 
       Production
-      Join Chickens on Production.IdChicken = Chickens.Id
+      Join Chickens on Production.Id = Chickens.Id
       Join Cages on Cages.IdChicken = Chickens.Id
-      Join Workshop on Cages.IdWorkshop = Workshop.Id
-      Join Workers on Workers.IdWorkshop = Workshop.Id
+      Join Workers on Cages.IdWorker = Workers.Id
 Where
       Surname = @workerSurname
 go
       
 --Запрос 5 Среднее количество яиц, которое получает в день каждый работник от обслуживаемых им кур?
+select
+      Workers.Surname
+      ,AVG(Production.NumberOfEggs) as AverageEggsPerDay
+      
+from 
+      Cages
+      Join Chickens on Cages.IdChicken = Chickens.Id
+      Join Workers on Cages.IdWorker = Workers.Id
+      Join Production on Chickens.Id = Production.Id
+Group by 
+        Workers.Surname
+        
+go
 
 -- Запрос 6. В каком цеху курица, от которой получают больше всего яиц
 select 

@@ -46,8 +46,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdChicken" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Data" Type="date" Nullable="false" />
           <Property Name="NumberOfEggs" Type="int" Nullable="false" />
         </EntityType>
@@ -135,13 +134,13 @@
         </Association>
         <Association Name="FK_Production_Chicken">
           <End Role="Chickens" Type="Self.Chickens" Multiplicity="1" />
-          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <End Role="Production" Type="Self.Production" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Chickens">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Production">
-              <PropertyRef Name="IdChicken" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -249,8 +248,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdChicken" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="NumberOfEggs" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Chickens" Relationship="Self.FK_Production_Chicken" FromRole="Production" ToRole="Chickens" />
@@ -343,13 +341,13 @@
         </Association>
         <Association Name="FK_Production_Chicken">
           <End Role="Chickens" Type="Self.Chickens" Multiplicity="1" />
-          <End Role="Production" Type="Self.Production" Multiplicity="*" />
+          <End Role="Production" Type="Self.Production" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Chickens">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Production">
-              <PropertyRef Name="IdChicken" />
+              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -453,7 +451,6 @@
             <EntityTypeMapping TypeName="PoultryFarmModel.Production">
               <MappingFragment StoreEntitySet="Production">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdChicken" ColumnName="IdChicken" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="NumberOfEggs" ColumnName="NumberOfEggs" />
               </MappingFragment>

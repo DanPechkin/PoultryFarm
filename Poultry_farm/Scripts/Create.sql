@@ -110,11 +110,10 @@ create table Cages (
 --производство 
 create table Production 
 (     
-        Id             int    not null primary key identity(1,1), 
-        IdChicken      int    not null,                      -- внешний ключ 
+        Id             int    not null primary key, 
         [Data]         date   not null,                      -- дата
-        NumberOfEggs   int    not null                       -- количество яиц
+        NumberOfEggs   int    not null,                      -- количество яиц
 
     -- внешний ключ
-    constraint FK_Production_Chicken foreign key (IdChicken) references dbo.Chickens(Id)
+    constraint FK_Production_Chicken foreign key (Id) references dbo.Chickens(Id)
 );

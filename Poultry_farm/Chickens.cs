@@ -18,7 +18,6 @@ namespace Poultry_farm
         public Chickens()
         {
             this.Cages = new HashSet<Cages>();
-            this.Production = new HashSet<Production>();
         }
     
         public int Id { get; set; }
@@ -29,7 +28,6 @@ namespace Poultry_farm
         public virtual Breeds Breeds { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cages> Cages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Production> Production { get; set; }
+        public virtual Production Production { get; set; }
     }
 }
